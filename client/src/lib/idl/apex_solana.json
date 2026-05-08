@@ -1,0 +1,362 @@
+{
+  "address": "3YKNvs1ZizwFzbraboHsxAeLSoKx4UFDwxkuNXqMkEX5",
+  "metadata": {
+    "name": "apex_solana",
+    "version": "0.1.0",
+    "spec": "0.1.0"
+  },
+  "version": "0.1.0",
+  "name": "apex_solana",
+  "instructions": [
+    {
+      "name": "initializeState",
+      "accounts": [
+        { "name": "authority", "isMut": true, "isSigner": true },
+        { "name": "state", "isMut": true, "isSigner": false },
+        { "name": "systemProgram", "isMut": false, "isSigner": false }
+      ],
+      "args": [{ "name": "registrationFeeLamports", "type": "u64" }]
+    },
+    {
+      "name": "newAgent",
+      "accounts": [
+        { "name": "authority", "isMut": true, "isSigner": true },
+        { "name": "state", "isMut": true, "isSigner": false },
+        { "name": "agent", "isMut": true, "isSigner": false },
+        { "name": "domainIndex", "isMut": true, "isSigner": false },
+        { "name": "authorityIndex", "isMut": true, "isSigner": false },
+        { "name": "systemProgram", "isMut": false, "isSigner": false }
+      ],
+      "args": [
+        { "name": "nextAgentId", "type": "u64" },
+        { "name": "agentDomain", "type": "string" },
+        { "name": "domainHash", "type": { "array": ["u8", 32] } }
+      ]
+    },
+    {
+      "name": "updateAgentDomain",
+      "accounts": [
+        { "name": "authority", "isMut": true, "isSigner": true },
+        { "name": "agent", "isMut": true, "isSigner": false },
+        { "name": "oldDomainIndex", "isMut": true, "isSigner": false },
+        { "name": "newDomainIndex", "isMut": true, "isSigner": false },
+        { "name": "systemProgram", "isMut": false, "isSigner": false }
+      ],
+      "args": [
+        { "name": "agentId", "type": "u64" },
+        { "name": "oldDomainHash", "type": { "array": ["u8", 32] } },
+        { "name": "newDomain", "type": "string" },
+        { "name": "newDomainHash", "type": { "array": ["u8", 32] } }
+      ]
+    },
+    {
+      "name": "updateAgentAuthority",
+      "accounts": [
+        { "name": "currentAuthority", "isMut": true, "isSigner": true },
+        { "name": "authorityTarget", "isMut": false, "isSigner": false },
+        { "name": "agent", "isMut": true, "isSigner": false },
+        { "name": "currentAuthorityIndex", "isMut": true, "isSigner": false },
+        { "name": "newAuthorityIndex", "isMut": true, "isSigner": false },
+        { "name": "systemProgram", "isMut": false, "isSigner": false }
+      ],
+      "args": [
+        { "name": "agentId", "type": "u64" },
+        { "name": "newAuthority", "type": "publicKey" }
+      ]
+    },
+    {
+      "name": "acceptFeedback",
+      "accounts": [
+        { "name": "serverAuthority", "isMut": true, "isSigner": true },
+        { "name": "clientAgent", "isMut": false, "isSigner": false },
+        { "name": "serverAgent", "isMut": false, "isSigner": false },
+        { "name": "feedbackAuthorization", "isMut": true, "isSigner": false },
+        { "name": "systemProgram", "isMut": false, "isSigner": false }
+      ],
+      "args": [
+        { "name": "clientAgentId", "type": "u64" },
+        { "name": "serverAgentId", "type": "u64" }
+      ]
+    },
+    {
+      "name": "validationRequest",
+      "accounts": [
+        { "name": "requester", "isMut": true, "isSigner": true },
+        { "name": "validatorAgent", "isMut": false, "isSigner": false },
+        { "name": "serverAgent", "isMut": false, "isSigner": false },
+        { "name": "validationRequest", "isMut": true, "isSigner": false },
+        { "name": "systemProgram", "isMut": false, "isSigner": false }
+      ],
+      "args": [
+        { "name": "validatorAgentId", "type": "u64" },
+        { "name": "serverAgentId", "type": "u64" },
+        { "name": "dataHash", "type": { "array": ["u8", 32] } }
+      ]
+    },
+    {
+      "name": "validationResponse",
+      "accounts": [
+        { "name": "validatorAuthority", "isMut": true, "isSigner": true },
+        { "name": "validationRequest", "isMut": true, "isSigner": false },
+        { "name": "validatorAgent", "isMut": false, "isSigner": false }
+      ],
+      "args": [
+        { "name": "dataHash", "type": { "array": ["u8", 32] } },
+        { "name": "response", "type": "u8" }
+      ]
+    },
+    {
+      "name": "createCampaign",
+      "accounts": [
+        { "name": "advertiser", "isMut": true, "isSigner": true },
+        { "name": "state", "isMut": true, "isSigner": false },
+        { "name": "advertiserAgent", "isMut": false, "isSigner": false },
+        { "name": "budgetMint", "isMut": false, "isSigner": false },
+        { "name": "advertiserTokenAccount", "isMut": true, "isSigner": false },
+        { "name": "campaign", "isMut": true, "isSigner": false },
+        { "name": "campaignVault", "isMut": true, "isSigner": false },
+        { "name": "tokenProgram", "isMut": false, "isSigner": false },
+        { "name": "systemProgram", "isMut": false, "isSigner": false },
+        { "name": "rent", "isMut": false, "isSigner": false }
+      ],
+      "args": [
+        { "name": "nextCampaignId", "type": "u64" },
+        { "name": "advertiserId", "type": "u64" },
+        { "name": "budgetAmount", "type": "u64" },
+        { "name": "cpaAmount", "type": "u64" },
+        { "name": "startTime", "type": "i64" },
+        { "name": "expiryTime", "type": "i64" },
+        { "name": "spec", "type": "bytes" }
+      ]
+    },
+    {
+      "name": "updateCampaign",
+      "accounts": [
+        { "name": "advertiser", "isMut": false, "isSigner": true },
+        { "name": "campaign", "isMut": true, "isSigner": false }
+      ],
+      "args": [
+        { "name": "campaignId", "type": "u64" },
+        { "name": "cpaAmount", "type": "u64" },
+        { "name": "startTime", "type": "i64" },
+        { "name": "expiryTime", "type": "i64" },
+        { "name": "spec", "type": "bytes" }
+      ]
+    },
+    {
+      "name": "processAction",
+      "accounts": [
+        { "name": "validator", "isMut": true, "isSigner": true },
+        { "name": "campaign", "isMut": true, "isSigner": false },
+        { "name": "campaignVault", "isMut": true, "isSigner": false },
+        { "name": "publisherAgent", "isMut": false, "isSigner": false },
+        { "name": "validatorAgent", "isMut": false, "isSigner": false },
+        { "name": "publisherTokenAccount", "isMut": true, "isSigner": false },
+        { "name": "processedAction", "isMut": true, "isSigner": false },
+        { "name": "tokenProgram", "isMut": false, "isSigner": false },
+        { "name": "systemProgram", "isMut": false, "isSigner": false }
+      ],
+      "args": [
+        { "name": "campaignId", "type": "u64" },
+        { "name": "publisherId", "type": "u64" },
+        { "name": "validatorId", "type": "u64" },
+        { "name": "actionHash", "type": { "array": ["u8", 32] } }
+      ]
+    },
+    {
+      "name": "withdrawRemainingBudget",
+      "accounts": [
+        { "name": "advertiser", "isMut": true, "isSigner": true },
+        { "name": "campaign", "isMut": true, "isSigner": false },
+        { "name": "campaignVault", "isMut": true, "isSigner": false },
+        { "name": "advertiserTokenAccount", "isMut": true, "isSigner": false },
+        { "name": "tokenProgram", "isMut": false, "isSigner": false }
+      ],
+      "args": [{ "name": "campaignId", "type": "u64" }]
+    },
+    {
+      "name": "createAd",
+      "accounts": [
+        { "name": "caller", "isMut": true, "isSigner": true },
+        { "name": "state", "isMut": true, "isSigner": false },
+        { "name": "campaign", "isMut": false, "isSigner": false },
+        { "name": "advertiserAgent", "isMut": false, "isSigner": false },
+        { "name": "publisherAgent", "isMut": false, "isSigner": false },
+        { "name": "ad", "isMut": true, "isSigner": false },
+        { "name": "systemProgram", "isMut": false, "isSigner": false }
+      ],
+      "args": [
+        { "name": "nextAdId", "type": "u64" },
+        { "name": "campaignId", "type": "u64" },
+        { "name": "publisherId", "type": "u64" },
+        { "name": "startTime", "type": "i64" },
+        { "name": "metadata", "type": "bytes" }
+      ]
+    },
+    {
+      "name": "updateAd",
+      "accounts": [
+        { "name": "advertiser", "isMut": true, "isSigner": true },
+        { "name": "ad", "isMut": true, "isSigner": false },
+        { "name": "campaign", "isMut": false, "isSigner": false },
+        { "name": "advertiserAgent", "isMut": false, "isSigner": false }
+      ],
+      "args": [
+        { "name": "adId", "type": "u64" },
+        { "name": "metadata", "type": "bytes" }
+      ]
+    }
+  ],
+  "accounts": [
+    {
+      "name": "GlobalState",
+      "type": {
+        "kind": "struct",
+        "fields": [
+          { "name": "authority", "type": "publicKey" },
+          { "name": "registrationFeeLamports", "type": "u64" },
+          { "name": "agentCount", "type": "u64" },
+          { "name": "campaignCount", "type": "u64" },
+          { "name": "adCount", "type": "u64" },
+          { "name": "bump", "type": "u8" }
+        ]
+      }
+    },
+    {
+      "name": "AgentInfo",
+      "type": {
+        "kind": "struct",
+        "fields": [
+          { "name": "agentId", "type": "u64" },
+          { "name": "agentDomain", "type": "string" },
+          { "name": "authority", "type": "publicKey" },
+          { "name": "bump", "type": "u8" }
+        ]
+      }
+    },
+    {
+      "name": "DomainIndex",
+      "type": {
+        "kind": "struct",
+        "fields": [
+          { "name": "agentId", "type": "u64" },
+          { "name": "bump", "type": "u8" }
+        ]
+      }
+    },
+    {
+      "name": "AuthorityIndex",
+      "type": {
+        "kind": "struct",
+        "fields": [
+          { "name": "agentId", "type": "u64" },
+          { "name": "bump", "type": "u8" }
+        ]
+      }
+    },
+    {
+      "name": "FeedbackAuthorization",
+      "type": {
+        "kind": "struct",
+        "fields": [
+          { "name": "clientAgentId", "type": "u64" },
+          { "name": "serverAgentId", "type": "u64" },
+          { "name": "feedbackAuthId", "type": { "array": ["u8", 32] } },
+          { "name": "authorizedAt", "type": "i64" },
+          { "name": "bump", "type": "u8" }
+        ]
+      }
+    },
+    {
+      "name": "ValidationRequestAccount",
+      "type": {
+        "kind": "struct",
+        "fields": [
+          { "name": "validatorAgentId", "type": "u64" },
+          { "name": "serverAgentId", "type": "u64" },
+          { "name": "dataHash", "type": { "array": ["u8", 32] } },
+          { "name": "requestedSlot", "type": "u64" },
+          { "name": "expirySlot", "type": "u64" },
+          { "name": "responded", "type": "bool" },
+          { "name": "response", "type": "u8" },
+          { "name": "responder", "type": "publicKey" },
+          { "name": "bump", "type": "u8" }
+        ]
+      }
+    },
+    {
+      "name": "CampaignAccount",
+      "type": {
+        "kind": "struct",
+        "fields": [
+          { "name": "campaignId", "type": "u64" },
+          { "name": "advertiserId", "type": "u64" },
+          { "name": "authority", "type": "publicKey" },
+          { "name": "budgetAmount", "type": "u64" },
+          { "name": "spentAmount", "type": "u64" },
+          { "name": "cpaAmount", "type": "u64" },
+          { "name": "budgetMint", "type": "publicKey" },
+          { "name": "startTime", "type": "i64" },
+          { "name": "expiryTime", "type": "i64" },
+          { "name": "spec", "type": "bytes" },
+          { "name": "vaultBump", "type": "u8" },
+          { "name": "bump", "type": "u8" }
+        ]
+      }
+    },
+    {
+      "name": "ProcessedAction",
+      "type": {
+        "kind": "struct",
+        "fields": [
+          { "name": "campaignId", "type": "u64" },
+          { "name": "publisherId", "type": "u64" },
+          { "name": "validatorId", "type": "u64" },
+          { "name": "actionHash", "type": { "array": ["u8", 32] } },
+          { "name": "paymentAmount", "type": "u64" },
+          { "name": "processedAt", "type": "i64" },
+          { "name": "bump", "type": "u8" }
+        ]
+      }
+    },
+    {
+      "name": "AdAccount",
+      "type": {
+        "kind": "struct",
+        "fields": [
+          { "name": "adId", "type": "u64" },
+          { "name": "campaignId", "type": "u64" },
+          { "name": "advertiserId", "type": "u64" },
+          { "name": "publisherId", "type": "u64" },
+          { "name": "startTime", "type": "i64" },
+          { "name": "metadata", "type": "bytes" },
+          { "name": "bump", "type": "u8" }
+        ]
+      }
+    }
+  ],
+  "errors": [
+    { "code": 6000, "name": "Unauthorized", "msg": "Caller is not authorized" },
+    { "code": 6001, "name": "InvalidDomain", "msg": "Invalid domain" },
+    { "code": 6002, "name": "InvalidDomainHash", "msg": "Domain hash mismatch" },
+    { "code": 6003, "name": "InvalidNextAgentId", "msg": "Wrong next agent id" },
+    { "code": 6004, "name": "InvalidNextCampaignId", "msg": "Wrong next campaign id" },
+    { "code": 6005, "name": "InvalidNextAdId", "msg": "Wrong next ad id" },
+    { "code": 6006, "name": "InvalidBudgetAmount", "msg": "Invalid budget amount" },
+    { "code": 6007, "name": "InvalidCpaAmount", "msg": "Invalid CPA amount" },
+    { "code": 6008, "name": "InvalidTimeRange", "msg": "Invalid time range" },
+    { "code": 6009, "name": "CampaignAlreadyExpired", "msg": "Campaign already expired" },
+    { "code": 6010, "name": "CampaignNotActive", "msg": "Campaign not active" },
+    { "code": 6011, "name": "CampaignStillActive", "msg": "Campaign still active" },
+    { "code": 6012, "name": "InsufficientBudget", "msg": "Insufficient budget" },
+    { "code": 6013, "name": "SpecTooLarge", "msg": "Spec too large" },
+    { "code": 6014, "name": "MetadataTooLarge", "msg": "Metadata too large" },
+    { "code": 6015, "name": "InvalidStartTime", "msg": "Invalid start time" },
+    { "code": 6016, "name": "InvalidValidationResponse", "msg": "Invalid validation response" },
+    { "code": 6017, "name": "ValidationRequestNotFound", "msg": "Validation request not found" },
+    { "code": 6018, "name": "ValidationRequestExpired", "msg": "Validation request expired" },
+    { "code": 6019, "name": "ValidationAlreadyResponded", "msg": "Validation already responded" },
+    { "code": 6020, "name": "InvalidAgentAuthority", "msg": "Invalid agent authority" },
+    { "code": 6021, "name": "Overflow", "msg": "Arithmetic overflow" }
+  ]
+}
