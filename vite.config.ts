@@ -2,25 +2,28 @@ import tailwindcss from "@tailwindcss/vite";
 import react from "@vitejs/plugin-react";
 import path from "path";
 import { defineConfig } from "vite";
+import { nodePolyfills } from "vite-plugin-node-polyfills";
 
 export default defineConfig({
-  plugins: [react(), tailwindcss()],
+  plugins: [
+    react(),
+    tailwindcss(),
+    nodePolyfills({
+      // Solana / Anchor libraries reach for Node's `Buffer`, `process`, and a
+      // few stream/crypto bits at module top-level. Inject globals + shims so
+      // the bundle works in the browser.
+      globals: { Buffer: true, global: true, process: true },
+      protocolImports: true,
+    }),
+  ],
   resolve: {
     alias: {
       "@": path.resolve(import.meta.dirname, "client", "src"),
       "@shared": path.resolve(import.meta.dirname, "shared"),
-      buffer: "buffer",
     },
-  },
-  define: {
-    "process.env": {},
-    global: "globalThis",
   },
   optimizeDeps: {
-    include: ["buffer", "@coral-xyz/anchor", "@solana/web3.js", "@solana/spl-token"],
-    esbuildOptions: {
-      target: "esnext",
-    },
+    esbuildOptions: { target: "esnext" },
   },
   root: path.resolve(import.meta.dirname, "client"),
   build: {
