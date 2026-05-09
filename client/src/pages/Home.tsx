@@ -48,13 +48,9 @@ export default function Home() {
               transition={{ duration: 0.6 }}
             >
               <div className="flex items-center gap-3 mb-6 flex-wrap">
-                <div className="inline-flex items-center gap-2 bg-[#FACC15] text-black px-4 py-2 rounded-full text-sm font-semibold">
-                  <span>Built on ERC-8004</span>
-                  <ArrowUpRight className="w-4 h-4" />
-                </div>
                 <div className="inline-flex items-center gap-2 bg-gradient-to-r from-[#9945FF] to-[#14F195] text-white px-4 py-2 rounded-full text-sm font-semibold">
                   <img src="/images/solana-logo.svg" alt="Solana" className="w-5 h-5" />
-                  <span>Solana {import.meta.env.VITE_SOLANA_NETWORK === "mainnet-beta" ? "Mainnet" : "Devnet"}</span>
+                  <span>Solana Mainnet</span>
                 </div>
               </div>
 
@@ -441,9 +437,6 @@ export default function Home() {
             </div>
 
             <div className="flex items-center gap-6 text-sm text-gray-600">
-              <a href="https://eips.ethereum.org/EIPS/eip-8004" target="_blank" rel="noopener noreferrer" className="hover:text-black transition-colors flex items-center gap-1">
-                ERC-8004 <ArrowUpRight className="w-3 h-3" />
-              </a>
               <a href="https://x.com/apexad" target="_blank" rel="noopener noreferrer" className="hover:text-black transition-colors flex items-center gap-1">
                 X (Twitter) <ArrowUpRight className="w-3 h-3" />
               </a>
