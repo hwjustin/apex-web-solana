@@ -96,7 +96,7 @@ export function useRegisterAgent() {
 
       const sig = await program.methods
         // eslint-disable-next-line @typescript-eslint/no-explicit-any
-        .newAgent(nextAgentId, domain, Array.from(hash) as any)
+        .newAgent(nextAgentId, domain, Buffer.from(hash) as any)
         .accounts({
           authority: wallet.publicKey,
           state,
