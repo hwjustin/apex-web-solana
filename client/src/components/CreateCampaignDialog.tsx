@@ -21,6 +21,7 @@ import {
 import { Loader2, DollarSign, Calendar, FileText, Type, AlignLeft } from "lucide-react";
 import { toast } from "sonner";
 import BN from "bn.js";
+import { Buffer } from "buffer";
 
 import { useCreateCampaign } from "@/lib/solana/hooks/useCampaign";
 import { parseUsdc } from "@/lib/solana/utils";

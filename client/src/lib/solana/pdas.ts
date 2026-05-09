@@ -5,6 +5,7 @@
 
 import { PublicKey } from "@solana/web3.js";
 import BN from "bn.js";
+import { Buffer } from "buffer";
 import { PROGRAM_ID } from "./config";
 
 export const STATE_SEED = Buffer.from("state");
