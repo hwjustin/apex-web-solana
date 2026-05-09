@@ -231,7 +231,7 @@ export function useProcessAction() {
           args.publisherId,
           args.validatorId,
           // eslint-disable-next-line @typescript-eslint/no-explicit-any
-          Array.from(args.actionHash) as any,
+          Buffer.from(args.actionHash) as any,
         )
         .accounts({
           validator: wallet.publicKey,
