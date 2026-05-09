@@ -9,6 +9,7 @@ import { useMemo, useState } from "react";
 import { Link } from "wouter";
 import { useWallet } from "@solana/wallet-adapter-react";
 import { useWalletModal } from "@solana/wallet-adapter-react-ui";
+import { Buffer } from "buffer";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";

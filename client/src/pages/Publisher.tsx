@@ -7,6 +7,7 @@ import { Link } from "wouter";
 import { useWallet } from "@solana/wallet-adapter-react";
 import { Wallet } from "lucide-react";
 import BN from "bn.js";
+import { Buffer } from "buffer";
 
 import { Button } from "@/components/ui/button";
 import { WalletButton } from "@/components/WalletButton";
