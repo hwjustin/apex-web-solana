@@ -8,6 +8,7 @@ import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { useConnection, useWallet } from "@solana/wallet-adapter-react";
 import { PublicKey, SystemProgram } from "@solana/web3.js";
 import BN from "bn.js";
+import { Buffer } from "buffer";
 
 import { getProgram, getReadonlyProgram } from "../program";
 import {

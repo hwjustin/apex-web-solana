@@ -5,6 +5,7 @@
 import { useQuery } from "@tanstack/react-query";
 import { PublicKey } from "@solana/web3.js";
 import BN from "bn.js";
+import { Buffer } from "buffer";
 
 import { getReadonlyProgram } from "../program";
 

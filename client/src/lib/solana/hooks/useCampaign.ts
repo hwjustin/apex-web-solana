@@ -12,6 +12,7 @@ import {
 } from "@solana/spl-token";
 import { PublicKey, SystemProgram, SYSVAR_RENT_PUBKEY, Transaction } from "@solana/web3.js";
 import BN from "bn.js";
+import { Buffer } from "buffer";
 
 import { getProgram, getReadonlyProgram } from "../program";
 import {
