@@ -13,11 +13,13 @@
  */
 
 export type ApexSolana = {
+  address: string;
+  metadata: { name: string; version: string; spec: string };
   version: "0.1.0";
   name: "apex_solana";
   instructions: Array<{
     name: string;
-    accounts: Array<{ name: string; isMut: boolean; isSigner: boolean }>;
+    accounts: Array<{ name: string; writable?: boolean; signer?: boolean }>;
     args: Array<{ name: string; type: unknown }>;
   }>;
   accounts: Array<{ name: string; type: { kind: "struct"; fields: Array<{ name: string; type: unknown }> } }>;
