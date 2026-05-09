@@ -50,7 +50,7 @@ export default function Home() {
               <div className="flex items-center gap-3 mb-6 flex-wrap">
                 <div className="inline-flex items-center gap-2 bg-gradient-to-r from-[#9945FF] to-[#14F195] text-white px-4 py-2 rounded-full text-sm font-semibold">
                   <img src="/images/solana-logo.svg" alt="Solana" className="w-5 h-5" />
-                  <span>Solana Mainnet</span>
+                  <span>Solana Devnet</span>
                 </div>
               </div>
 
