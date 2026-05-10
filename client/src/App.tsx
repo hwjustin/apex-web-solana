@@ -7,7 +7,6 @@ import { WalletProvider } from "./contexts/WalletProvider";
 import Home from "./pages/Home";
 import Campaign from "./pages/Campaign";
 import Demo from "./pages/Demo";
-import Publisher from "./pages/Publisher";
 import Dashboard from "./pages/Dashboard";
 
 function Router() {
@@ -16,7 +15,6 @@ function Router() {
       <Route path={"/"} component={Home} />
       <Route path={"/campaign"} component={Campaign} />
       <Route path={"/demo"} component={Demo} />
-      <Route path={"/publisher"} component={Publisher} />
       <Route path={"/dashboard"} component={Dashboard} />
     </Switch>
   );

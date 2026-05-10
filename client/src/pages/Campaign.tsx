@@ -235,9 +235,6 @@ export default function Campaign() {
             <Link href="/demo" className="text-sm text-gray-600 hover:text-black">
               Demo
             </Link>
-            <Link href="/publisher" className="text-sm text-gray-600 hover:text-black">
-              Publisher
-            </Link>
             <WalletButton />
           </div>
         </div>

@@ -109,7 +109,6 @@ export default function Demo() {
           </Link>
           <div className="flex items-center gap-4">
             <Link href="/campaign" className="text-sm text-gray-600">Campaigns</Link>
-            <Link href="/publisher" className="text-sm text-gray-600">Publisher</Link>
             <Link href="/dashboard" className="text-sm text-gray-600">Dashboard</Link>
             <WalletButton />
           </div>

@@ -73,7 +73,6 @@ export default function Dashboard() {
           <div className="flex items-center gap-4">
             <Link href="/campaign" className="text-sm text-gray-600">Campaigns</Link>
             <Link href="/demo" className="text-sm text-gray-600">Demo</Link>
-            <Link href="/publisher" className="text-sm text-gray-600">Publisher</Link>
             <WalletButton />
           </div>
         </div>
