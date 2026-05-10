@@ -16,6 +16,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { WalletButton } from "@/components/WalletButton";
 import { AdCard } from "@/components/AdCard";
+import { ValidatorActivityFeed } from "@/components/ValidatorActivityFeed";
 import { useAllCampaigns, type CampaignRecord } from "@/lib/solana/hooks/useCampaign";
 import { formatUsdc } from "@/lib/solana/utils";
 
@@ -168,6 +169,8 @@ export default function Demo() {
             <Send className="w-4 h-4" />
           </Button>
         </div>
+
+        <ValidatorActivityFeed />
       </main>
     </div>
   );
