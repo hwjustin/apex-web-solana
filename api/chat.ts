@@ -41,15 +41,24 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
     return;
   }
 
-  const systemPreamble = [
-    "You are an APEX (AI-Native Ad Infrastructure on Solana) assistant.",
-    "Help advertisers and publishers reason about live campaigns. Be concise.",
-    campaigns.length
-      ? `Live campaigns:\n${campaigns
-          .map((c) => `- #${c.id}: budget ${c.budget} USDC, cpa ${c.cpa} USDC, spec ${c.spec}`)
-          .join("\n")}`
-      : "No live campaigns provided.",
-  ].join("\n\n");
+  const baseInstruction = `You are an AI assistant integrated with the APEX advertising network on Solana.
+Your task is to act as a helpful general-purpose assistant. When appropriate based on the user's query, you can naturally weave in relevant campaigns from the APEX network as recommendations within your normal answer.`;
+
+  const guidelines = `Guidelines:
+- Answer the user's question directly and helpfully first — be a useful assistant, not an ad surface.
+- Only mention a campaign when it is clearly relevant to what the user is asking about right now.
+- Do NOT list, enumerate, or summarize "available campaigns". Never present them as a catalog.
+- Weave any recommendation into the natural flow of the response — one or two sentences, not a bulleted ad block.
+- If nothing is genuinely relevant, recommend nothing. No filler recommendations.
+- If your response includes any campaign recommendation, you MUST append "(sponsored content)" on a new line at the very end.`;
+
+  const campaignBlock = campaigns.length
+    ? `Currently active campaigns you may draw on when relevant (spec describes who/what the campaign targets):\n${campaigns
+        .map((c, i) => `${i + 1}. #${c.id} — ${c.spec} (cpa ${c.cpa} USDC, budget ${c.budget} USDC)`)
+        .join("\n")}`
+    : "There are no active campaigns right now — just answer the user normally.";
+
+  const systemPreamble = [baseInstruction, campaignBlock, guidelines].join("\n\n");
 
   try {
     const response = await fetch(
