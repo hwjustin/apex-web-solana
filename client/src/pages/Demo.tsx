@@ -12,6 +12,7 @@ import { Loader2, Send } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { WalletButton } from "@/components/WalletButton";
+import { ValidatorSettlementPanel } from "@/components/ValidatorSettlementPanel";
 import { useAllCampaigns } from "@/lib/solana/hooks/useCampaign";
 import { formatUsdc } from "@/lib/solana/utils";
 
@@ -125,6 +126,8 @@ export default function Demo() {
             <Send className="w-4 h-4" />
           </Button>
         </div>
+
+        <ValidatorSettlementPanel />
       </main>
     </div>
   );
